@@ -1,0 +1,32 @@
+{
+  "name": "fx-rates",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "start": "node dist/server.js",
+    "dev": "ts-node server.ts",
+    "test-fetch": "ts-node src/test.ts"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Oleksii Shevchenko",
+    "email": "uzlabini@gmail.com"
+  },
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.13.4",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.4",
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.1.0",
+    "nodemon": "^3.1.11",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
