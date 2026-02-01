@@ -16,59 +16,67 @@ Jednoduchá backendová aplikace postavená na Node.js a TypeScriptu, která slo
 
 ## Instalace a spuštění
 
-1. **Klonování repozitáře**:
+1. **Klonování repozitáře:**
    ```bash
    git clone <url-vasho-repozitare>
    cd fx-rates
-Instalace závislostí:
+   ```
+2. **Instalace závislostí:**
+    ```
+    npm install
+    ```
+3. **Konfigurace prostředí:** 
+V kořenovém adresáři vytvořte soubor ```.env``` a vložte do něj následující parametry:
+    ```
+    PORT=3000
+    API_KEY=secret123
+    ```
+### Poznámka:
+Tento projekt používá ```.env``` pro správu konfigurace. Ujistěte se, že proměnné jsou správně nastaveny před spuštěním.
 
-Bash
-npm install
-Konfigurace prostředí: V kořenovém adresáři vytvořte soubor .env a vložte do něj následující parametry:
+4. **Spuštění v režimu vývoje:**
+    ```
+    npm run dev
+    ```
+5. **Sestavení a produkční spuštění:**
+    ```
+    npm run build
+    npm start
+    ```
 
-Fragment kódu
-PORT=3000
-API_KEY=secret123
-(Poznámka: Tento projekt používá .env pro správu konfigurace. Ujistěte se, že proměnné jsou správně nastaveny před spuštěním.)
+## Dokumentace API
 
-Spuštění v režimu vývoje:
+Všechny požadavky (kromě healthchecku) vyžadují autorizaci pomocí hlavičky `x-api-key`.
 
-Bash
-npm run dev
-Sestavení a produkční spuštění:
+### 1. Healthcheck
+`GET /healthcheck`
+- **Popis**: Slouží k ověření dostupnosti a stavu serveru.
+- **Zabezpečení**: Žádné (veřejný endpoint).
+- **Odpověď**: `200 OK` s obsahem `OK` (text/plain).
 
-Bash
-npm run build
-Bash
-npm start
-Dokumentace API
-Healthcheck
-GET /healthcheck
+### 2. Kompletní kurzovní lístek
+`GET /rates`
+- **Popis**: Vrátí aktuální seznam všech stažených měnových kurzů vůči CZK.
+- **Zabezpečení**: Vyžaduje hlavičku `x-api-key`.
+- **Formát odpovědi**: Pole objektů, kde každý objekt obsahuje kód měny a její kurz.
+  - *Příklad:* `[{"USD": 23.840}, {"EUR": 25.120}, ...]`.
 
-Popis: Ověření, že server běží.
+### 3. Kurz pro konkrétní měnu
+`GET /rates/:code`
+- **Příklad**: `GET /rates/USD`
+- **Popis**: Vrátí kurz pro jednu konkrétní měnu zadanou pomocí kódu v URL.
+- **Zabezpečení**: Vyžaduje hlavičku `x-api-key`.
+- **Formát odpovědi**: Objekt s vyžádanou měnou.
+  - *Příklad:* `{"USD": 23.840}`.
+- **Chybové stavy**: `404 Not Found` (pokud měna nebyla nalezena v mezipaměti).
 
-Zabezpečení: Žádné (veřejné).
+---
 
-Odpověď: 200 OK (text/plain).
+## Autor
 
-Kompletní kurzovní lístek
-GET /rates
+Tento projekt vytvořil a spravuje **Oleksii Shevchenko**.
 
-Popis: Vrátí pole všech aktuálních kurzů.
+- **LinkedIn**: [Oleksii Shevchenko](https://linkedin.com/in/oleksii-shevchenko-535ab61b8)
+- **Email**: [uzlabini@gmail.com](mailto:uzlabini@gmail.com)
 
-Zabezpečení: Vyžaduje hlavičku x-api-key.
-
-Formát odpovědi: [{"USD": 23.84}, {"EUR": 25.12}, ...]
-
-Kurz pro konkrétní měnu
-GET /rates/:code
-
-Příklad: GET /rates/USD
-
-Zabezpečení: Vyžaduje hlavičku x-api-key.
-
-Formát odpovědi: {"USD": 23.84}
-
-Chybové stavy: 404 Not Found (pokud měna neexistuje).
-
-Autor: [Tvoje Jméno]
+Máte-li jakékoli dotazy nebo připomínky, neváhejte mě kontaktovat!

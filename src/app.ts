@@ -1,8 +1,11 @@
 import { ratesCache } from "./cache/rates.cache";
 import express, { NextFunction, Request, Response } from "express";
+import path from 'path';
 
 const app = express();
 const API_KEY = process.env.API_KEY;
+
+app.use(express.static(path.join(__dirname, '../public')));
 
 app.get("/healthcheck", (req: Request, res: Response) => {
   res.status(200).header("Content-Type", "text/plain").send("OK");

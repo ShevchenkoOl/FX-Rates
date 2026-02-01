@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FX Rates Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <input
+        type="text"
+        id="currencyInput"
+        placeholder="Zadejte kód (např. USD)"
+        class="input"
+      />
+      <button onclick="searchCurrency()" class="btn_search">Hledat</button>
+      <button onclick="fetchRates()" class="btn_all">Vše</button>
+    </div>
+    <div id="errorMsg" class="paragraph_error"></div>
+    <div class="card">
+      <h1>Aktuální kurzy (CZK)</h1>
+      <table id="ratesTable">
+        <thead>
+          <tr>
+            <th>Měna</th>
+            <th>Kurz</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="2" style="text-align: center">Načítání...</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="status" id="lastUpdate"></div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
